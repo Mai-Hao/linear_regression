@@ -61,7 +61,7 @@ elif choice == 'Model development':
     
     st.write("##### 2. Data visualisation")
     u=st.text_input('Inser var')
-    fig1 = sns.regplot(data=df, x=u, y='credit value')    
+    fig1 = sns.regplot(data=df, x=u, y='giatri')    
     st.pyplot(fig1.figure)
 
     st.write("##### 3. Build model...")
