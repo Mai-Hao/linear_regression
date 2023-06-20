@@ -1,4 +1,4 @@
-# import libraries
+# Import libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,12 +8,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import streamlit as st
 
+# Split data
 df = pd.read_csv("credit access.csv", encoding='latin-1')
 
 st.title("Linear regression")
 st.write("## Predict credit value")
 
-uploaded_file = st.file_uploader("Choose a file", type=['csv'])
+uploaded_file = st.file_uploader("Import a file", type=['csv'])
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, encoding='latin-1')
     df.to_csv("data.csv", index = False)
@@ -23,6 +24,7 @@ y = df['giatri']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state= 12)
 
+# Build model:
 model = LinearRegression()
 
 model.fit(X_train, y_train)
@@ -33,7 +35,7 @@ yhat_test = model.predict(X_test)
 score_train=model.score(X_train, y_train)
 score_test=model.score(X_test, y_test)
 
-
+# Evaluate model:
 mse=mean_squared_error(y_test, yhat_test)
 rmse=mean_squared_error(y_test, yhat_test, squared=False)
 mae=mean_absolute_error(y_test, yhat_test)
