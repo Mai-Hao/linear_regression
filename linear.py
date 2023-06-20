@@ -41,27 +41,27 @@ rmse=mean_squared_error(y_test, yhat_test, squared=False)
 mae=mean_absolute_error(y_test, yhat_test)
 
 
-menu = ["Mục tiêu của mô hình", "Xây dựng mô hình", "Sử dụng mô hình để dự báo"]
-choice = st.sidebar.selectbox('Danh mục tính năng', menu)
+menu = ["Aim of model", "Model development", "Forecasting"]
+choice = st.sidebar.selectbox('Category', menu)
 
-if choice == 'Mục tiêu của mô hình':    
-    st.subheader("Mục tiêu của mô hình")
+if choice == 'Aim of model':    
+    st.subheader("Aim of model")
     st.write("""
-    ###### Mô hình được xây dựng để dự báo giá trị vay vốn của nông hộ dựa trên các biến đặc điểm chủ hộ, điều kiện của nông hộ.
+    ###### Model to forecast credit value of households
     """)  
-    st.write("""###### Mô hình sử dụng thuật toán LinearRegression""")
+    st.write("""###### Model using LinearRegression""")
     st.image("LSM.png")
     st.image("LSM_1.png")
 
-elif choice == 'Xây dựng mô hình':
-    st.subheader("Xây dựng mô hình")
-    st.write("##### 1. Hiển thị dữ liệu")
+elif choice == 'Model development':
+    st.subheader("Model development")
+    st.write("##### 1. Data frame")
     st.dataframe(df.head(3))
     st.dataframe(df.tail(3))  
     
-    st.write("##### 2. Trực quan hóa dữ liệu")
-    u=st.text_input('Nhập biến muốn vẽ vào đây')
-    fig1 = sns.regplot(data=df, x=u, y='giatri')    
+    st.write("##### 2. Data visualisation")
+    u=st.text_input('Inser var')
+    fig1 = sns.regplot(data=df, x=u, y='credit value')    
     st.pyplot(fig1.figure)
 
     st.write("##### 3. Build model...")
@@ -73,8 +73,8 @@ elif choice == 'Xây dựng mô hình':
     st.code("MAE:"+str(round(mae,2)))
 
     
-elif choice == 'Sử dụng mô hình để dự báo':
-    st.subheader("Sử dụng mô hình để dự báo")
+elif choice == ' ':
+    st.subheader("Forecasting")
     flag = False
     lines = None
     type = st.radio("Upload data or Input data?", options=("Upload", "Input"))
@@ -87,18 +87,15 @@ elif choice == 'Sử dụng mô hình để dự báo':
             # st.write(lines.columns)
             flag = True       
     if type=="Input":        
-        git = st.number_input('Insert giatri')
-        DT = st.number_input('Insert DT')
-        TN = st.number_input('Insert TN')
-        SPT = st.number_input('Insert SPT')
-        GTC = st.number_input('Insert GTC')
-        GD = st.number_input('Insert GD')
-        TCH = st.number_input('Insert TCH')
-        GT = st.number_input('Insert GT')
-        DV = st.number_input('Insert DV')
-        VPCT = st.number_input('Insert VPCT')
-        LS = st.number_input('Insert LS')
-        lines={'giatri':[git],'DT':[DT],'TN':[TN],'SPT':[SPT],'GTC':[GTC],'GD':[GD],'TCH':[TCH],'GT':[GT],'DV':[DV],'VPCT':[VPCT],'LS':[LS]}
+        git = st.number_input('Insert credit value')
+        DT = st.number_input('Insert squares of house')
+        TN = st.number_input('Insert income')
+        SPT = st.number_input('Insert dependent people')
+        GTC = st.number_input('Insert collateral value')
+        TCH = st.number_input('Insert age of household head')
+        VPCT = st.number_input('Insert borrowing in OTC market')
+        LS = st.number_input('Insert credit history')
+        lines={'credit_value':[git],'DT':[DT],'TN':[TN],'SPT':[SPT],'GTC':[GTC],'TCH':[TCH],'VPCT':[VPCT],'LS':[LS]}
         lines=pd.DataFrame(lines)
         st.dataframe(lines)
         flag = True
@@ -109,4 +106,4 @@ elif choice == 'Sử dụng mô hình để dự báo':
             st.code(lines)
             X_1 = lines.drop(columns=['giatri'])   
             y_pred_new = model.predict(X_1)       
-            st.code("giá trị dự báo: " + str(y_pred_new))
+            st.code("predicted value: " + str(y_pred_new))
