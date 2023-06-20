@@ -86,16 +86,19 @@ elif choice == ' ':
             st.dataframe(lines)
             # st.write(lines.columns)
             flag = True       
-    if type=="Input":        
-        git = st.number_input('Insert credit value')
-        DT = st.number_input('Insert squares of house')
-        TN = st.number_input('Insert income')
-        SPT = st.number_input('Insert dependent people')
-        GTC = st.number_input('Insert collateral value')
-        TCH = st.number_input('Insert age of household head')
-        VPCT = st.number_input('Insert borrowing in OTC market')
-        LS = st.number_input('Insert credit history')
-        lines={'credit_value':[git],'DT':[DT],'TN':[TN],'SPT':[SPT],'GTC':[GTC],'TCH':[TCH],'VPCT':[VPCT],'LS':[LS]}
+     if type=="Input":        
+        git = st.number_input('Insert giatri')
+        DT = st.number_input('Insert DT')
+        TN = st.number_input('Insert TN')
+        SPT = st.number_input('Insert SPT')
+        GTC = st.number_input('Insert GTC')
+        GD = st.number_input('Insert GD')
+        TCH = st.number_input('Insert TCH')
+        GT = st.number_input('Insert GT')
+        DV = st.number_input('Insert DV')
+        VPCT = st.number_input('Insert VPCT')
+        LS = st.number_input('Insert LS')
+        lines={'giatri':[git],'DT':[DT],'TN':[TN],'SPT':[SPT],'GTC':[GTC],'GD':[GD],'TCH':[TCH],'GT':[GT],'DV':[DV],'VPCT':[VPCT],'LS':[LS]}
         lines=pd.DataFrame(lines)
         st.dataframe(lines)
         flag = True
@@ -106,4 +109,4 @@ elif choice == ' ':
             st.code(lines)
             X_1 = lines.drop(columns=['giatri'])   
             y_pred_new = model.predict(X_1)       
-            st.code("predicted value: " + str(y_pred_new))
+            st.code("giá trị dự báo: " + str(y_pred_new))
