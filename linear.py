@@ -86,7 +86,7 @@ elif choice == ' ':
             st.dataframe(lines)
             # st.write(lines.columns)
             flag = True       
-     if type=="Input":        
+    if type=="Input":        
         git = st.number_input('Insert giatri')
         DT = st.number_input('Insert DT')
         TN = st.number_input('Insert TN')
